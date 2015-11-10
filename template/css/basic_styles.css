@@ -1,0 +1,36 @@
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { 
+    display: block;
+	clear: both;
+}
+
+#pagewrap {
+   width: 980px;
+   margin: 0 auto;
+   
+}
+#header {
+   height: 50px;
+   
+}
+#content {
+   width: 740px;
+   float: right;
+   
+   min-height: 600px;
+}
+#sidebar {
+   width: 225px;
+   float: left;
+   
+}
+#footer {
+   clear: both;
+   background-color: red;
+}
+
+h1,h2,h3,h4,h5{
+margin: 5px;
+/*margin-top: 5px;
+margin-bottom: 5px;*/
+}
+h1{margin: 3px 5px 3px 5px;}

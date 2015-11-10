@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://richworld-st.ru/ru/reviews -->
+<html lang="ru" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+	<![endif]-->
+	<title>reviews</title>
+	<meta name="keywords" content="reviews seo_keywords">
+	<meta name="description" content="reviews">
+	<meta name="robots" content="index,follow">
+	
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="initial-scale=1.0">
+	<link rel="shortcut icon" href="http://richworld-st.ru/favicon.ico" type="image/x-icon">
+	<link href="./02_files/custom_styles.css" rel="stylesheet" type="text/css">
+	<link href="./02_files/basic_styles.css" rel="stylesheet" type="text/css"> 
+	<link href="./02_files/font-awesome.min.css" rel="stylesheet" type="text/css"> 
+	<script type="text/javascript" src="./02_files/jquery.min.js"></script><script type="text/javascript" async="" src="./02_files/widget.js"></script><script type="text/javascript" async="" src="./02_files/widget(1).js"></script>
+	<script src="./02_files/jquery.viewportchecker.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="./02_files/red.css"></head>
+<body>
+	<div id="pagewrap">
+		<header id="header">
+		<div id="header_phone">+7 (908) 177-93-99</div>
+		<div class="auth_block">
+			<a href="javascript: void(0)" id="auth_form_container_run"><i class="fa fa-sign-in"></i>  Войти</a> | 
+<a href="http://richworld-st.ru/ru/auth/registration"><i class="fa fa-arrow-circle-o-right"></i>  Регистрация</a>
+<div id="auth_form_container" style="display: none" title="Авторизация">
+<form name="auth_form" method="post" action="javascript:void(0);">
+					<input id="email_auth" name="email_auth" type="text" size="" placeholder="Ваш e-mail">
+					<input id="pw_auth" name="pw_auth" type="password" size="" placeholder="Введите пароль">
+					<input type="submit" value="Отправить" id="auth_button">					
+</form>
+<p id="registration_trigger" style="position: absolute; top: 30px;"><a href="http://richworld-st.ru/ru/auth/registration"><i class="fa fa-arrow-circle-o-right"></i> Регистрация</a></p>
+<p id="recall_trigger" style="position: absolute; absolute; top: 57px;"><a href="http://richworld-st.ru/ru/auth/forget"><i class="fa fa-question-circle"></i> Забыли пароль?</a></p>
+<div id="dialog-message" title=""></div>
+</div>
+<script>
+function auth_info_window($auth_window_header,$window_content,$reload_page)
+{
+	$(function(){
+		$('#dialog-message').html($window_content);
+		$('#dialog-message').attr('title',$auth_window_header);
+				$( "#dialog-message" ).dialog({
+				  modal: true,
+				  buttons: {
+					Ok: function() {
+					  $( this ).dialog( "close" );
+					  if ($reload_page==true) location.reload(true);
+					  if ($reload_page==2) window.location.replace("http://richworld-st.ru/ru/auth/login");
+					}
+				  }
+				});
+			  });
+}
+
+$(document).ready(function(){
+    $('#auth_button').click(function(){
+		/*$email_auth = $("#email_auth").val();
+		$pw_auth = $("#pw_auth").val();
+		*/
+		
+		if ($("#email_auth").val()=='' || $("#pw_auth").val()==''){
+			auth_info_window('Oops!','<p>Укажите ваши e-mail и пароль</p>',false);
+			exit();
+			}
+
+		
+		var form_data = {
+		"email_auth":$("#email_auth").val(),
+		"pw_auth":$("#pw_auth").val()
+        };
+		
+		/*if ($form_data['email_auth']=='' || $form_data['pw_auth']==''){alert('Заполните форму авторизации');} else {
+		alert('send');
+		alert($form_data['email_auth']);
+		alert($form_data['pw_auth']);	*/
+		//alert($.toJSON(form_data));	
+		
+		$.ajax({
+		dataType: 'json',
+		type:'POST',
+		data:'json_data=' + $.toJSON(form_data),
+		//url: 'response.php?action=sample5',
+		//url: 'auth/auth_check',
+		url: 'http://richworld-st.ru/ru/auth/auth_check_ajax',
+		success: function(jsondata){
+			//$('#auth_button').html('Name = ' + jsondata.name + ', Nickname = ' + jsondata.nickname);
+			//alert(jsondata);
+			//alert('success!');
+			$('.h_l1_b1').html('Name = '+jsondata.auth_result);
+			//alert(jsondata.auth_result);
+		if (jsondata.auth_result==1) {auth_info_window('Вы авторизованы!','<p>Добропожаловать, '+jsondata.name+' '+jsondata.otch+'</p>',true);} 
+		
+		if (jsondata.auth_result==0) { auth_info_window('Авторизация не прошла!','<p>Не верный логин или пароль! Повторите попытку</p>',true);}
+		if (jsondata.auth_result==2) { auth_info_window('Авторизация не прошла!','<p>Количество попыток авторизации превысило предельно допустимое.</p>',2);}
+			
+			
+			
+			
+			
+			//location.reload(true);			
+		},
+		error: function($exception){
+			//$('#auth_button').html('Name = ' + jsondata.name + ', Nickname = ' + jsondata.nickname);
+			//alert(jsondata);
+			alert('error!');
+			alert('Exeption:'+$exception);
+			alert ($exception);
+		},
+		done: function(){
+			//$('#auth_button').html('Name = ' + jsondata.name + ', Nickname = ' + jsondata.nickname);
+			//alert(jsondata);
+			alert('done!');
+		
+		}
+		});
+		})
+	
+		$('#auth_form_container_run').click(function(){
+			
+        
+		
+			$('#auth_form_container').dialog({			
+				modal: true,
+				height: 215,
+				width: 400,
+				resizable: false,
+				beforeClose: function() {
+					setTimeout(function(){
+					$( ".ui-dialog" ).removeClass( "animated zoomIn" );
+					$( ".ui-dialog" ).addClass( "animated zoomOut" );	
+					
+					}, 10);
+					setTimeout(function(){
+					$( ".ui-dialog" ).removeClass( "animated zoomOut" );
+					}, 200);
+					$( ".ui-dialog" ).css( "display",'none' );	
+					},
+				 close: function() {$( ".ui-dialog" ).css( "display",'block' );	
+				 setTimeout(function(){
+					$( ".ui-dialog" ).css( "display",'none' );	
+				 },200)
+				 }
+				});
+		$( ".ui-dialog" ).addClass( "animated zoomIn" );
+		
+		})
+	
+	})
+
+</script>		</div>
+		<!--<div class='lang_switcher'>
+			<p>ЯЗЫК</p>
+			<a id='ru' href='#'></a>
+			<a id='en' href='#'></a>
+		</div>-->
+
+		<div class="lang_switcher">
+			<p>ЯЗЫК</p>									
+			<a id="ru" href="./02_files/02.html"></a>
+			<a id="en" href="http://richworld-st.ru/en/reviews"></a>
+			<!--<a id='tr' href='http://richworld-st.ru/tr/reviews'></a>-->
+			
+</div>		<div class="shopping_cart">
+			<div class="shopping_cart_counter">
+				<div class="shopping_cart_counter_container">0</div>
+			</div>
+			
+			<div class="shopping_cart_informer">
+				<a href="http://richworld-st.ru/ru/commerce/cart">В корзине <span>0</span> единиц товара</a>
+			</div>
+		</div>
+		</header>
+		 <nav>
+			<div class="navigation_trigger"></div>
+			 <ul id="main_nav">
+				<li><a href="http://richworld-st.ru/ru">Главная</a></li>
+				<li><a href="http://richworld-st.ru/ru/news/">Новости</a></li>
+				<li><a href="http://richworld-st.ru/ru/about">О нас</a></li>
+				<li><a href="http://richworld-st.ru/ru/opt">Оптовикам</a></li>
+				<li><a href="http://richworld-st.ru/ru/payment-and-delivery">Оплата и доставка</a></li>
+				<li><a class="active" href="./02_files/02.html">Отзывы</a></li>
+				<li><a href="http://richworld-st.ru/ru/contacts/">Контакты</a></li>
+			 </ul>
+		  </nav>
+		<aside id="sidebar">
+			<div id="logo_block">
+				<a href="http://richworld-st.ru/ru"></a>
+			</div>
+		  <div class="side_menu">
+		  
+			<a id="novelty" href="http://richworld-st.ru/ru/commerce/novelty">Новинки</a>
+			<div class="rich_world_products_btn">Rich World</div>
+			<ul class="rich_world_products_list">
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei">Гели для наращивания ногтей</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/uf-lampy">УФ лампы</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/gel-laki">Гель-лаки</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/uf-gel-laki-6ml">УФ гель-лаки 6 мл</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/uf-gel-laki-73-ml">УФ гель-лаки 7.3 мл</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/uf-gel-laki-10-ml">УФ гель-лаки 10 мл</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/praymery">Праймеры</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/kisti-dlya-gelya">Кисти для геля</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/kisti-dlya-dizayna">Кисти для дизайна</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/kisti-dlya-akrila">Кисти для акрила</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/pilki">Пилки</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/bafy">Бафы</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/polirovki">Полировки</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/formy">Формы</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/tipsy">Типсы</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/zhidkosti-dlya-nogtey">Жидкости для ногтей</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/pigmenty">Пигменты</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/blestki-i-pyl">Блестки и пыль</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/soty">Соты</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/strazy">Стразы</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/nakleyki">Наклейки</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/vspomogatelnye-prinadlezhnosti">Вспомогательные принадлежности</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/rashodnye-materialy">Расходные материалы</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/elektrooborudovanie">Электрооборудование</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/naraschivanie-resnic">Наращивание ресниц</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/parafinoterapiya">Парафинотерапия</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/spa">SPA</a></li>
+								
+				<li><a href="http://richworld-st.ru/ru/catalog/rich-world/startovye-nabory-dlya-naraschivaniya-nogtey">Стартовые наборы для наращивания ногтей</a></li>
+							</ul>
+			<a id="partners" href="javascript:void(0)">Партнеры</a>
+			<ul id="partners_list">
+							<li class="partner_item"><p>Mirage Sky</p>
+					<ul>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/geli-dlya-narashivaniya-nogtei">Гели для наращивания ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/uf-lampy">УФ лампы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/gel-laki">Гель-лаки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/uf-gel-laki-6ml">УФ гель-лаки 6 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/uf-gel-laki-73-ml">УФ гель-лаки 7.3 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/uf-gel-laki-10-ml">УФ гель-лаки 10 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/praymery">Праймеры</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/kisti-dlya-gelya">Кисти для геля</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/kisti-dlya-dizayna">Кисти для дизайна</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/kisti-dlya-akrila">Кисти для акрила</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/pilki">Пилки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/bafy">Бафы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/polirovki">Полировки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/formy">Формы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/tipsy">Типсы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/zhidkosti-dlya-nogtey">Жидкости для ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/pigmenty">Пигменты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/blestki-i-pyl">Блестки и пыль</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/soty">Соты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/strazy">Стразы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/nakleyki">Наклейки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/vspomogatelnye-prinadlezhnosti">Вспомогательные принадлежности</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/rashodnye-materialy">Расходные материалы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/elektrooborudovanie">Электрооборудование</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/naraschivanie-resnic">Наращивание ресниц</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/parafinoterapiya">Парафинотерапия</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/spa">SPA</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/mirage-sky/startovye-nabory-dlya-naraschivaniya-nogtey">Стартовые наборы для наращивания ногтей</a></li>
+										</ul>
+				</li>
+							<li class="partner_item"><p>Planet Nails</p>
+					<ul>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/geli-dlya-narashivaniya-nogtei">Гели для наращивания ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/uf-lampy">УФ лампы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/gel-laki">Гель-лаки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/uf-gel-laki-6ml">УФ гель-лаки 6 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/uf-gel-laki-73-ml">УФ гель-лаки 7.3 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/uf-gel-laki-10-ml">УФ гель-лаки 10 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/praymery">Праймеры</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/kisti-dlya-gelya">Кисти для геля</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/kisti-dlya-dizayna">Кисти для дизайна</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/kisti-dlya-akrila">Кисти для акрила</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/pilki">Пилки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/bafy">Бафы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/polirovki">Полировки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/formy">Формы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/tipsy">Типсы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/zhidkosti-dlya-nogtey">Жидкости для ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/pigmenty">Пигменты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/blestki-i-pyl">Блестки и пыль</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/soty">Соты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/strazy">Стразы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/nakleyki">Наклейки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/vspomogatelnye-prinadlezhnosti">Вспомогательные принадлежности</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/rashodnye-materialy">Расходные материалы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/elektrooborudovanie">Электрооборудование</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/naraschivanie-resnic">Наращивание ресниц</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/parafinoterapiya">Парафинотерапия</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/spa">SPA</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/planet-nail/startovye-nabory-dlya-naraschivaniya-nogtey">Стартовые наборы для наращивания ногтей</a></li>
+										</ul>
+				</li>
+							<li class="partner_item"><p>Lady Victory</p>
+					<ul>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/geli-dlya-narashivaniya-nogtei">Гели для наращивания ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/uf-lampy">УФ лампы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/gel-laki">Гель-лаки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/uf-gel-laki-6ml">УФ гель-лаки 6 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/uf-gel-laki-73-ml">УФ гель-лаки 7.3 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/uf-gel-laki-10-ml">УФ гель-лаки 10 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/praymery">Праймеры</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/kisti-dlya-gelya">Кисти для геля</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/kisti-dlya-dizayna">Кисти для дизайна</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/kisti-dlya-akrila">Кисти для акрила</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/pilki">Пилки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/bafy">Бафы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/polirovki">Полировки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/formy">Формы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/tipsy">Типсы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/zhidkosti-dlya-nogtey">Жидкости для ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/pigmenty">Пигменты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/blestki-i-pyl">Блестки и пыль</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/soty">Соты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/strazy">Стразы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/nakleyki">Наклейки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/vspomogatelnye-prinadlezhnosti">Вспомогательные принадлежности</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/rashodnye-materialy">Расходные материалы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/elektrooborudovanie">Электрооборудование</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/naraschivanie-resnic">Наращивание ресниц</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/parafinoterapiya">Парафинотерапия</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/spa">SPA</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/lady-victory/startovye-nabory-dlya-naraschivaniya-nogtey">Стартовые наборы для наращивания ногтей</a></li>
+										</ul>
+				</li>
+							<li class="partner_item"><p>Fashion Nail</p>
+					<ul>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/geli-dlya-narashivaniya-nogtei">Гели для наращивания ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/uf-lampy">УФ лампы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/gel-laki">Гель-лаки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/uf-gel-laki-6ml">УФ гель-лаки 6 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/uf-gel-laki-73-ml">УФ гель-лаки 7.3 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/uf-gel-laki-10-ml">УФ гель-лаки 10 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/praymery">Праймеры</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/kisti-dlya-gelya">Кисти для геля</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/kisti-dlya-dizayna">Кисти для дизайна</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/kisti-dlya-akrila">Кисти для акрила</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/pilki">Пилки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/bafy">Бафы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/polirovki">Полировки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/formy">Формы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/tipsy">Типсы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/zhidkosti-dlya-nogtey">Жидкости для ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/pigmenty">Пигменты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/blestki-i-pyl">Блестки и пыль</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/soty">Соты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/strazy">Стразы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/nakleyki">Наклейки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/vspomogatelnye-prinadlezhnosti">Вспомогательные принадлежности</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/rashodnye-materialy">Расходные материалы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/elektrooborudovanie">Электрооборудование</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/naraschivanie-resnic">Наращивание ресниц</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/parafinoterapiya">Парафинотерапия</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/spa">SPA</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/fashion-nail/startovye-nabory-dlya-naraschivaniya-nogtey">Стартовые наборы для наращивания ногтей</a></li>
+										</ul>
+				</li>
+							<li class="partner_item"><p>JessNail</p>
+					<ul>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/geli-dlya-narashivaniya-nogtei">Гели для наращивания ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/uf-lampy">УФ лампы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/gel-laki">Гель-лаки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/uf-gel-laki-6ml">УФ гель-лаки 6 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/uf-gel-laki-73-ml">УФ гель-лаки 7.3 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/uf-gel-laki-10-ml">УФ гель-лаки 10 мл</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/praymery">Праймеры</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/kisti-dlya-gelya">Кисти для геля</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/kisti-dlya-dizayna">Кисти для дизайна</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/kisti-dlya-akrila">Кисти для акрила</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/pilki">Пилки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/bafy">Бафы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/polirovki">Полировки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/formy">Формы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/tipsy">Типсы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/zhidkosti-dlya-nogtey">Жидкости для ногтей</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/pigmenty">Пигменты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/blestki-i-pyl">Блестки и пыль</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/soty">Соты</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/strazy">Стразы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/nakleyki">Наклейки</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/vspomogatelnye-prinadlezhnosti">Вспомогательные принадлежности</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/rashodnye-materialy">Расходные материалы</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/elektrooborudovanie">Электрооборудование</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/naraschivanie-resnic">Наращивание ресниц</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/parafinoterapiya">Парафинотерапия</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/spa">SPA</a></li>
+											
+					<li><a href="http://richworld-st.ru/ru/catalog/jessnail/startovye-nabory-dlya-naraschivaniya-nogtey">Стартовые наборы для наращивания ногтей</a></li>
+										</ul>
+				</li>
+				
+			</ul>
+			
+			
+<div class="recommended_block">
+	<div class="recommended_block_header">Рекомендуемые товары</div>
+	<div class="jcarousel" data-jcarousel="true" data-jcarouselautoscroll="true">
+		<ul style="left: -204px; top: 0px;">
+		
+			<li class="side_scroll_li">
+			<div class="side_scroll_item">
+			<div style="text-align: center">
+				<a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/184"><img class="side_scroll_img" src="./02_files/RVB-10-001_thumb.png">
+				</a></div><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/184">
+				
+				<div class="side_scroll_price">3 ⃏</div>
+				<div class="side_scroll_name">Гель-лак с мерцанием RVB</div>
+				</a><div style="text-align: center; margin: 3px 0px;"><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/184">
+				</a><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/184" class="side_scroll_more">Просмотр</a>
+				</div>
+				
+			</div>
+			</li>
+		
+			<li class="side_scroll_li">
+			<div class="side_scroll_item">
+			<div style="text-align: center">
+				<a href="http://richworld-st.ru/ru/catalog/rich-world/gel-laki/185"><img class="side_scroll_img" src="./02_files/RVB-10-001_thumb.png">
+				</a></div><a href="http://richworld-st.ru/ru/catalog/rich-world/gel-laki/185">
+				
+				<div class="side_scroll_price">3 ⃏</div>
+				<div class="side_scroll_name">Гель обычный</div>
+				</a><div style="text-align: center; margin: 3px 0px;"><a href="http://richworld-st.ru/ru/catalog/rich-world/gel-laki/185">
+				</a><a href="http://richworld-st.ru/ru/catalog/rich-world/gel-laki/185" class="side_scroll_more">Просмотр</a>
+				</div>
+				
+			</div>
+			</li>
+		
+			<li class="side_scroll_li">
+			<div class="side_scroll_item">
+			<div style="text-align: center">
+				<a href="http://richworld-st.ru/ru/catalog/rich-world/gel-laki/186"><img class="side_scroll_img" src="./02_files/RVB-10-001_thumb.png">
+				</a></div><a href="http://richworld-st.ru/ru/catalog/rich-world/gel-laki/186">
+				
+				<div class="side_scroll_price">156 ⃏</div>
+				<div class="side_scroll_name">Лак черный при черный</div>
+				</a><div style="text-align: center; margin: 3px 0px;"><a href="http://richworld-st.ru/ru/catalog/rich-world/gel-laki/186">
+				</a><a href="http://richworld-st.ru/ru/catalog/rich-world/gel-laki/186" class="side_scroll_more">Просмотр</a>
+				</div>
+				
+			</div>
+			</li>
+		
+			<li class="side_scroll_li">
+			<div class="side_scroll_item">
+			<div style="text-align: center">
+				<a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/189"><img class="side_scroll_img" src="./02_files/bg1660270694_thumb.jpg">
+				</a></div><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/189">
+				
+				<div class="side_scroll_price">5 ⃏</div>
+				<div class="side_scroll_name">Заголовок товара</div>
+				</a><div style="text-align: center; margin: 3px 0px;"><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/189">
+				</a><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/189" class="side_scroll_more">Просмотр</a>
+				</div>
+				
+			</div>
+			</li>
+		
+			<li class="side_scroll_li">
+			<div class="side_scroll_item">
+			<div style="text-align: center">
+				<a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/191"><img class="side_scroll_img" src="./02_files/BN-02_thumb.png">
+				</a></div><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/191">
+				
+				<div class="side_scroll_price">55.5 ⃏</div>
+				<div class="side_scroll_name">Лезвия для педикюрного станка BN-02</div>
+				</a><div style="text-align: center; margin: 3px 0px;"><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/191">
+				</a><a href="http://richworld-st.ru/ru/catalog/rich-world/geli-dlya-narashivaniya-nogtei/191" class="side_scroll_more">Просмотр</a>
+				</div>
+				
+			</div>
+			</li>
+		
+			<li class="side_scroll_li">
+			<div class="side_scroll_item">
+			<div style="text-align: center">
+				<a href="http://richworld-st.ru/ru/catalog/lady-victory/uf-lampy/192"><img class="side_scroll_img" src="./02_files/9343111.image_page_big_.3045953671__thumb.jpg">
+				</a></div><a href="http://richworld-st.ru/ru/catalog/lady-victory/uf-lampy/192">
+				
+				<div class="side_scroll_price">55.5 ⃏</div>
+				<div class="side_scroll_name">test</div>
+				</a><div style="text-align: center; margin: 3px 0px;"><a href="http://richworld-st.ru/ru/catalog/lady-victory/uf-lampy/192">
+				</a><a href="http://richworld-st.ru/ru/catalog/lady-victory/uf-lampy/192" class="side_scroll_more">Просмотр</a>
+				</div>
+				
+			</div>
+			</li>
+				</ul>
+	</div>
+</div>
+<!--<a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+<a href="#" class="jcarousel-control-next">&rsaquo;</a>
+<p class="jcarousel-pagination"></p>-->
+<style>
+.side_scroll_more
+{
+	background: #f6627c; /* Old browsers */
+	background: -moz-linear-gradient(top,  #f6627c 0%, #f6627c 50%, #e23956 51%, #e23956 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6627c), color-stop(50%,#f6627c), color-stop(51%,#e23956), color-stop(100%,#e23956)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #f6627c 0%,#f6627c 50%,#e23956 51%,#e23956 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #f6627c 0%,#f6627c 50%,#e23956 51%,#e23956 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #f6627c 0%,#f6627c 50%,#e23956 51%,#e23956 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #f6627c 0%,#f6627c 50%,#e23956 51%,#e23956 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6627c', endColorstr='#e23956',GradientType=0 ); /* IE6-9 */
+
+	width: 80px;
+    height: 27px;
+    color: white;
+    font-size: 13px;
+    border-radius: 5px;
+   
+    
+    border: none;
+    text-shadow: 1px 1px 0px #E23956;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+    padding: 4px;
+}
+
+.side_scroll_item{
+	background-color: white;
+	height: 212px;
+}
+
+.side_scroll_item a{text-decoration: none;}
+.side_scroll_item a:hover{text-decoration: underline;}
+
+.side_scroll_li{
+    width: 204px;
+}
+.side_scroll_price{
+/*display: inline-block; */
+    text-align: center;
+    /* float: right; */
+    /* position: absolute; */
+    font-size: 20px;
+    /* text-align: right; */
+    /* width: 85px; */
+    /* overflow: hidden; */
+}
+.side_scroll_img{
+	width: 120px;
+//	clear: both
+margin: 5px;
+   
+    padding: 4px;
+}
+
+.side_scroll_name{
+	font-size: 13px;
+    text-align: center;
+}
+.recommended_block{
+    width: 205px;
+	}
+
+</style>
+<script>
+(function($) {
+    $(function() {
+        $('.jcarousel').jcarousel({
+    animation: {
+        duration: 2000,
+        easing:   'easeOutQuart',
+        complete: function() {
+        }
+		},
+		auto: 3,
+		wrap: 'circular',}).jcarouselAutoscroll({
+        interval: 3000,
+        target: '+=1',
+        autostart: true
+    });
+
+        $('.jcarousel-control-prev')
+            .on('jcarouselcontrol:active', function() {
+                $(this).removeClass('inactive');
+            })
+            .on('jcarouselcontrol:inactive', function() {
+                $(this).addClass('inactive');
+            })
+            .jcarouselControl({
+                target: '-=1'
+            });
+
+        $('.jcarousel-control-next')
+            .on('jcarouselcontrol:active', function() {
+                $(this).removeClass('inactive');
+            })
+            .on('jcarouselcontrol:inactive', function() {
+                $(this).addClass('inactive');
+            })
+            .jcarouselControl({
+                target: '+=1'
+            });
+
+        $('.jcarousel-pagination')
+            .on('jcarouselpagination:active', 'a', function() {
+                $(this).addClass('active');
+            })
+            .on('jcarouselpagination:inactive', 'a', function() {
+                $(this).removeClass('active');
+            })
+            .jcarouselPagination();
+    });
+})(jQuery);
+</script>
+<style>
+	/*
+This is the visible area of you carousel.
+Set a width here to define how much items are visible.
+The width can be either fixed in px or flexible in %.
+Position must be relative!
+*/
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+/*
+This is the container of the carousel items.
+You must ensure that the position is relative or absolute and
+that the width is big enough to contain all items.
+*/
+.jcarousel ul {
+    width: 20000em;
+    position: relative;
+
+    /* Optional, required in this case since it's a <ul> element */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+These are the item elements. jCarousel works best, if the items
+have a fixed width and height (but it's not required).
+*/
+.jcarousel li {
+    /* Required only for block elements like <li>'s */
+    float: left;
+}
+</style>
+ <!--
+      'id' => string '183' (length=3)
+      'name' => string 'Гель-лак с мерцанием RVB-10-001' (length=48)
+      'name_tr' => string 'Shimmer RVB-10-001 ile Jel lehce' (length=33)
+      'category' => string 'Rich World' (length=10)
+      'category_alias' => string 'rich-world' (length=10)
+      'subcategory' => string 'УФ лампы' (length=15)
+      'subcategory_alias' => string 'uf-lampy' (length=8)      
+      'price-usd' => string '3' (length=1)
+      'price-usd-promo' => string '3' (length=1)
+      'price-try' => string '3' (length=1)
+      'price-try-promo' => string '3' (length=1)
+      'price-rub' => string '3' (length=1)
+      'price-rub-promo' => string '3' (length=1)
+      'image' => string 'RVB-10-001.png' (length=14)
+      'sku' => string 'RVB-10-001' (length=10)
+      'status' => string '0' (length=1)
+      'novelty' => string 'on' (length=2)
+      'recommended' => string 'on' (length=2)
+      'promo' => string 'on' (length=2)
+      'type' => string 'Приборы' (length=14)
+      'volume' => string '10' (length=2)
+      'width' => string '' (length=0)
+      'height' => string '' (length=0)
+      'thickness' => string '' (length=0)
+      'weight' => string '' (length=0)
+      'material' => string '' (length=0)
+      'abrasiveness' => string '' (length=0)
+      'seo_title' => string 'aaa' (length=3)
+      'seo_description' => string 'bbb' (length=3)
+      'seo_keywords' => string 'ccc' (length=3)
+  1 
+  -->		  </div>
+		  
+		</aside>  
+		<div id="content">
+		
+			<div class="search_form">
+				<form method="post" action="http://richworld-st.ru/ru/search">
+					<div class="search_form_lense"></div>
+					<input placeholder="Поиск по сайту" name="search_text" id="search_text" type="text" value="" size="40">
+					<input name="search_btn" id="search_btn" type="submit" value="Поиск">
+				</form>
+			</div>
+			<div style="position: relative; top: 15px;">
+								
+							</div>
+						<div class="content_container">			
+									
+<h1>Отзывы</h1>
+<div class="pager"><ul class="pager_ul" style="list-style: none"><li class="active">1</li><li><a href="http://richworld-st.ru/ru/reviews?page=2">2</a></li></ul></div><div class="add_review"><a class="btn_v2" style="margin: 10px;" href="http://richworld-st.ru/ru/reviews/add_review"><i class="fa fa-pencil"></i> Добавить свой отзыв</a></div>
+<div style="margin-top:20px;">
+				<div class="review_line">
+			<div class="review_id"><span>Автор: </span>Василий,</div>
+			
+			<div class="review_city">Москва</div>
+			<img style="float: left; width: 100px; padding: 5px;" src="./02_files/no_picture.jpg">
+			<div class="review_text">текст отзыва от василия текст отзыва от василия текст отзыва от василия текст отзыва от василия текст отзыва от василия текст отзыва от василия текст отзыва от...</div>
+			<!--<div class="review_date">2015-08-04 00:00:00</div>-->
+			<div class="review_link">
+				<!--<a href="http://richworld-st.ru/ru/reviews/1">Подробнее...</a>-->
+			</div>
+		</div>
+
+
+
+			<div class="review_line">
+			<div class="review_id"><span>Автор: </span>Николай,</div>
+			
+			<div class="review_city">Санкт-Петербург</div>
+			<img style="float: left; width: 100px; padding: 5px;" src="./02_files/no_picture.jpg">
+			<div class="review_text">отзыв от николая отзыв от николая отзыв от николая отзыв от николая отзыв от николая отзыв от николая отзыв от николая отзыв от николая отзыв от николая отзыв от...</div>
+			<!--<div class="review_date">2015-08-01 00:00:00</div>-->
+			<div class="review_link">
+				<!--<a href="http://richworld-st.ru/ru/reviews/2">Подробнее...</a>-->
+			</div>
+		</div>
+
+
+
+			<div class="review_line">
+			<div class="review_id"><span>Автор: </span>Сергей,</div>
+			
+			<div class="review_city">Ростов-на-Дону</div>
+			<img style="float: left; width: 100px; padding: 5px;" src="./02_files/no_picture.jpg">
+			<div class="review_text">отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3 отзыв 3...</div>
+			<!--<div class="review_date">2015-08-04 00:00:00</div>-->
+			<div class="review_link">
+				<!--<a href="http://richworld-st.ru/ru/reviews/3">Подробнее...</a>-->
+			</div>
+		</div>
+
+
+
+			<div class="review_line">
+			<div class="review_id"><span>Автор: </span>Владимир,</div>
+			
+			<div class="review_city">Новочеркасск</div>
+			<img style="float: left; width: 100px; padding: 5px;" src="./02_files/no_picture.jpg">
+			<div class="review_text">Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир Владимир...</div>
+			<!--<div class="review_date">2015-08-17 00:00:00</div>-->
+			<div class="review_link">
+				<!--<a href="http://richworld-st.ru/ru/reviews/4">Подробнее...</a>-->
+			</div>
+		</div>
+
+
+
+			<div class="review_line">
+			<div class="review_id"><span>Автор: </span>Александр,</div>
+			
+			<div class="review_city">Сочи</div>
+			<img style="float: left; width: 100px; padding: 5px;" src="./02_files/no_picture.jpg">
+			<div class="review_text">Александр Александр Александр Александр Александр Александр Александр Александр Александр Александр Александр Александр Александр Александр Александр...</div>
+			<!--<div class="review_date">2015-08-05 15:13:35</div>-->
+			<div class="review_link">
+				<!--<a href="http://richworld-st.ru/ru/reviews/6">Подробнее...</a>-->
+			</div>
+		</div>
+
+
+
+	</div>
+
+			</div>
+			
+		  
+		
+		</div>
+		
+		<footer id="footer">
+		<div class="phone_number_footer">+7 (908) 177-93-99</div>
+		<ul class="menu_footer">			
+			<li class=""><a href="http://richworld-st.ru/ru/payment-and-delivery" class="">Оплата и доставка</a></li>
+			<li class=""><a href="http://richworld-st.ru/ru/contacts" class="">Контакты</a></li>
+			<li class=""><a href="http://richworld-st.ru/ru/commerce/cart" class="">Корзина</a></li>
+		</ul>
+		</footer>
+	</div>
+<script>
+(function(){
+var widget_id = 776807;
+_shcp =[{widget_id : widget_id}];
+var lang =(navigator.language || navigator.systemLanguage 
+|| navigator.userLanguage ||"en")
+.substr(0,2).toLowerCase();
+var url ="widget.siteheart.com/widget/sh/"+ widget_id +"/"+ lang +"/widget.js";
+var hcc = document.createElement("script");
+hcc.type ="text/javascript";
+hcc.async =true;
+hcc.src =("https:"== document.location.protocol ?"https":"http")
++"://"+ url;
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hcc, s.nextSibling);
+})();
+</script>
+	<link href="./02_files/media_queries.css" rel="stylesheet" type="text/css">
+	
+	<link href="./02_files/animate.css" rel="stylesheet" type="text/css">
+	
+	<script src="./02_files/css3-mediaqueries.js" type="text/javascript"></script>
+	
+	<script type="text/javascript" src="./02_files/sidemenu.js"></script>
+	
+	<script type="text/javascript" src="./02_files/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./02_files/jquery.jcarousel.min.js"></script>
+	
+	<link href="./02_files/jquery-ui.css" rel="stylesheet" type="text/css">
+	<link href="./02_files/theme_custom.css" rel="stylesheet" type="text/css">
+	
+	
+	<script type="text/javascript" src="./02_files/jquery.json.min.js"></script>
+	<script type="text/javascript" src="./02_files/jquery.serializejson.min.js"></script>
+
+<div id="sh_button" class="shc sh_btn sh_btn_right sh_btn_right_center" style="visibility: visible; top: 58.5px;"><img rel="logo" style="margin: 6px;" class="shc sh_logo_btn sh_logo_img" src="./02_files/logo.png"><div class="shc sh_title_text" rel="title"><div class="shc sh_btn_char_trans">О</div><div class="shc sh_btn_char_trans">н</div><div class="shc sh_btn_char_trans">л</div><div class="shc sh_btn_char_trans">а</div><div class="shc sh_btn_char_trans">й</div><div class="shc sh_btn_char_trans">н</div><div class="shc sh_btn_char_trans">-</div><div class="shc sh_btn_char_trans">к</div><div class="shc sh_btn_char_trans">о</div><div class="shc sh_btn_char_trans">н</div><div class="shc sh_btn_char_trans">с</div><div class="shc sh_btn_char_trans">у</div><div class="shc sh_btn_char_trans">л</div><div class="shc sh_btn_char_trans">ь</div><div class="shc sh_btn_char_trans">т</div><div class="shc sh_btn_char_trans">а</div><div class="shc sh_btn_char_trans">н</div><div class="shc sh_btn_char_trans">т</div></div><div class="shc sh_block_counter" title="Посетителей на сайте"><span rel="counter">0</span></div></div><iframe src="./02_files/a.html" scrolling="no" frameborder="0" style="position:absolute;width:0;height:0;left:-14444;"></iframe></body></html>

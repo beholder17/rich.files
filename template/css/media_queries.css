@@ -1,0 +1,280 @@
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { 
+    display: block;
+}
+
+img {
+   max-width: 100%;
+   height: auto;
+   width: auto\9; /* ie8 */
+}
+
+.video embed,
+.video object,
+.video iframe {
+   width: 100%;
+   height: auto;
+}
+
+@media screen and (max-width: 980px) {
+   /*#pagewrap {
+      width: 95%;
+   }
+   #content {
+      width: 60%;
+      padding: 3% 4%;
+   }
+   #sidebar {
+      width: 30%;
+   }
+   #sidebar .widget {
+      padding: 8% 7%;
+      margin-bottom: 10px;
+   }*/
+}
+
+
+
+@media screen and (max-width: 650px) {
+ /*  #header {
+      height: auto;
+   }
+   #searchform {
+      position: absolute;
+      top: 5px;
+      right: 0;
+   }
+   #main-nav {
+      position: static;
+   }
+   #site-logo {
+      margin: 15px 100px 5px 0;
+      position: static;
+   }
+   #site-description {
+      margin: 0 0 15px;
+      position: static;
+   }
+   #content {
+      width: auto;
+      float: none;
+      margin: 20px 0;
+   }
+   #sidebar {
+      width: 100%;
+      float: none;
+      margin: 0;
+   }*/
+} 
+
+
+
+@media screen and (max-width: 480px) {
+div.hello{
+    width: 100%;
+    position: inherit;
+}
+
+#pagewrap {
+      width: 95%;
+   }
+   #content {
+      width: 60%;
+      padding: 3% 4%;
+   }
+   #sidebar {
+      width: 30%;
+   }
+   #sidebar .widget {
+      padding: 8% 7%;
+      margin-bottom: 10px;
+   }
+#header {
+      height: auto;
+   }
+   #searchform {
+      position: absolute;
+      top: 5px;
+      right: 0;
+   }
+   #main-nav {
+      position: static;
+   }
+   #site-logo {
+      margin: 15px 100px 5px 0;
+      position: static;
+   }
+   #site-description {
+      margin: 0 0 15px;
+      position: static;
+   }
+   #content {
+      width: auto;
+      float: none;
+      margin: 20px 0;
+   }
+   #sidebar {
+      width: 100%;
+      float: none;
+      margin: 0;
+   }
+   html {
+      -webkit-text-size-adjust: none;	  
+   }
+   body{
+   background-image: none !important;
+   background-color: rgb(230, 230, 230);
+   }
+   
+   #main_nav a {
+      font-size: 90%;
+      padding: 10px 8px;	
+	  color: red;	  
+   }
+   
+   /* custom styles */
+   .menu_footer{
+   padding: 0px;
+  margin: 0px;
+  position: relative;
+  top: 33px;
+  display: none;
+   }
+   
+   ul#main_nav a{
+   font-weight: bold;
+    color: rgb(230, 230, 230);
+	width: 100%;
+   }
+   ul#main_nav li{
+   float: none;
+   border-bottom: 1px solid #9E122B;
+   }
+   
+   .search_form{
+   display: none;
+   }
+   
+   .nav{
+     width: 100%;
+  background-color: red;
+  display: inline-block;
+   }
+   
+   ul#main_nav li{background-image: none; }
+   ul#main_nav {
+    background-image: none;
+    height: auto;
+    line-height: 48px;
+    /* padding-left: 0px; */
+    /* border-radius: 5px; */
+    /* font-size: 15px; */
+    background-color: #B60D2C;
+    position: absolute;
+    width: 95%;
+    z-index: 5;
+    top: 92px;
+    box-shadow: 0px 2px 15px rgb(0,0,0);
+}
+
+#header{
+text-align: center;
+}
+
+#main_nav {
+display: none;
+}
+
+#header_phone {
+float: none;
+}
+.shopping_cart {
+  z-index: 4;
+   }
+.navigation_trigger{
+    width: 40px;
+    height: 40px;
+    background-color: #972448;
+    display: inline-block;
+    position: relative;
+    top: -31px;
+    border-radius: 3px;
+    box-shadow: 0px 0px -8px black;
+    border: 1px solid #771132;
+}   
+.lang_switcher {
+    width: 86px;
+    /* padding-left: 59px; */
+    position: relative;
+    top: 10px;
+    left: 61px;
+  }
+  
+  .lang_switcher p{display: none;}
+  
+  #header_phone:before{
+    content: "Rich World - лаки для ногтей";
+  position: relative;
+  top: 20px;
+  font-size: 20px;
+  text-align: center;
+  }
+  #header_phone{  position: relative;
+  top: -24px;
+  font-size: 0px;}
+  #logo_block{
+    margin: 0px auto 20px auto;
+  }
+  
+  #novelty {  
+  width: 100%;
+  }
+  .rich_world_products_btn {
+  
+  width: 100%;
+  }
+  a#partners {
+  height: 40px;
+  width: 100%;
+  }
+  .rich_world_products_list, ul#partners_list li ul{
+  width: 100%;
+  background-image: none;
+  }
+  ul#partners_list li p{
+  width: 100%;
+  }
+  .product_item{
+  width: 98%;
+  text-align: center;
+  }
+  .product_item_buy{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 150px;
+  height: 25px;
+  line-height: 25px;
+  }
+  .recommended_block, .recommended_block_header{
+  width: 100% !important;
+  }
+  .h2_alt{
+  font-size: 16px;  
+	}
+	
+	.content_line{
+	height: auto !important;
+	}
+	.content_line_readmore{
+	position: relative !important;
+	bottom: 0px !important;
+	right: 0px !important;
+	}
+	.auth_block{
+	top: 0px !important;
+	left: 0px !important;
+	}
+	.shopping_cart{
+	    top: 10px;
+	}
+}

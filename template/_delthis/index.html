@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+ <title>Заголовок страницы</title>
+ <meta name="keywords" content="" />
+ <meta name="description" content="" />
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+ <link rel="icon" href="/favicon.ico" type="image/x-icon">
+ <meta name="robots" content="all">
+ <link href="style.css" rel="stylesheet" type="text/css"> 
+ <link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+ <link rel="stylesheet" type="text/css" href="css/layout.css" />
+ <link rel="stylesheet" type="text/css" href="css/style2.css" />
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+ <script language="javascript" type="text/javascript" src="js/jquery.easing.js"></script>
+ <script language="javascript" type="text/javascript" src="js/script.js"></script>
+ <script type="text/javascript">
+ $(document).ready( function(){	
+		var buttons = { previous:$('#jslidernews2 .button-previous') ,
+						next:$('#jslidernews2 .button-next') };			 
+		$('#jslidernews2').lofJSidernews( { interval:5000,
+											 	easing:'easeInOutQuad',
+												duration:500,
+												auto:true,
+												mainWidth:380,
+												mainHeight:300,
+												navigatorHeight		: 100,
+												navigatorWidth		: 310,
+												maxItemDisplay:3,
+												buttons:buttons } );						
+	});
+ </script>
+ <style>
+	
+	ul.lof-main-wapper li {
+		position:relative;	
+	}
+ </style>
+</head>
+<body>
+<div class='canvas'>
+	<div class='header'>
+		<div class='header_line1'>
+			<div class='h_l1_b1'>
+				<form class='search_form' name="search" method="post" action="">
+					<input id="search_phrase" type="text" size="" placeholder="Введите поисковый запрос...">
+					<input type="submit" value="">
+				</form>
+			</div>
+			<div class='h_l1_b2'>
+				<div class='main_menu'>
+				<ul>
+					<li><a href='#'>База табулатур</a></li>
+					<li class='active'><a href='#'>Правила сайта</a></li>
+					<li><a href='#'>Обратная связь</a></li>
+					<li>Карта сайта
+						<ul>
+							<li><a href='#'>Пункт первый</a></li>
+							<li><a href='#'>Второй параметр</a></li>
+						</ul>
+					</li>		
+				</ul>
+				</div>
+			</div>
+			<div class='h_l1_b3'>
+				<div class='main_menu'>
+				<ul>
+					<li><a href='#'>Регистрация</a></li>
+					<li><a href='#'>Забыл пароль</a></li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		<div class='header_line2'>
+			<div class='h_l1_b1'>
+				
+			</div>
+			<div class='h_l1_b2'>
+				<div class='second_menu'>
+				<ul>
+					<li><a href='#'>Главная</a></li>
+					<li><a href='#'>База табулатур</a></li>
+					<li><a href='#'>Софт</a></li>
+					<li><a href='#'>Статьи</a></li>
+					<li><a href='#'>Обратная связь</a></li>
+					<li><a href='#'>Карта сайта</a></li>		
+				</ul>
+				</div>
+			</div>
+			<div class='h_l1_b3'>
+				<form name="auth_form" method="post" action="">
+					<input id="login_frm" type="text" size="" placeholder="Ваш логин">
+					<input id="password_frm" type="password" size="" placeholder="Введите пароль">
+					<input type="submit" value="Отправить">
+				</form>
+			</div>
+		</div>
+		<div class='header_line3'>
+			<div class='h_line3_b1'>
+			<div id="jslidernews2" class="lof-slidecontent">
+	<div class="preload"><div></div></div>
+            
+            
+            <div  class="button-previous">Назад</div>
+                   
+    		 <!-- MAIN CONTENT --> 
+              <div class="main-slider-content" style="width:684px; height:300px;">
+                <ul class="sliders-wrap-inner">
+                    <li>
+                            <img src="images/thumbl_980x340.png" title="Новость 1" >           
+                          <div class="slider-description">
+                            
+                            <p>Один из лучших телефонов современности, хотите узнать больше...
+                            <a class="readmore" href="#">Подробнее </a>
+                            </p>
+                         </div>
+                    </li> 
+                   <li>
+                      <img src="images/thumbl_980x340_002.png" title="Новость 2" >           
+                         <div class="slider-description">
+                           
+                            <p>Отличнейший телефон с кучей нужных и не нужных функций...
+                            <a class="readmore" href="#">Подробнее </a>
+                            </p>
+                         </div>
+                    </li> 
+                  
+                
+                  </ul>  	
+            </div>
+			   <!-- END MAIN CONTENT --> 
+           <!-- NAVIGATOR -->
+           	<div class="navigator-content">
+                  <div class="navigator-wrapper">
+                        <ul class="navigator-wrap-inner">
+                          <li>
+                                <div>
+                                    <img src="images/thumbs/thumbl_980x340.png" />
+                                    <h3> Новость 1 </h3>
+                                    <span>3.05.2012</span> - Нажмите чтобы узнать больше информации...
+                                </div>    
+                            </li>
+                             <li>
+                                <div>
+                                    <img src="images/thumbs/thumbl_980x340_002.png" />
+                                    <h3> Новость 2 </h3>
+                                    <span>3.05.2012</span> -Нажмите чтобы узнать больше информации. ..
+                                </div>    
+                            </li>
+                
+                               		
+                        </ul>
+                  </div>
+   
+             </div> 
+          <!----------------- END OF NAVIGATOR --------------------->
+          <div class="button-next">Вперед</div>
+ 
+ 		 <!-- BUTTON PLAY-STOP -->
+          <div class="button-control"><span></span></div>
+          <!-- END OF BUTTON PLAY-STOP -->
+			</div>
+			</div>
+			<div class='h_line3_b2'>
+			h_line3_b2
+			</div>
+			<div class='h_line3_b3'>
+			h_line3_b3
+			</div>
+		</div>
+		<div class='header_line4'>
+		<div class='tabs_window'>
+			<div class='eng_tabs'>
+			<ul class='engl_alphabet'>
+				<li><a href='#'>a</a></li>
+				<li><a href='#'>b</a></li>
+				<li><a href='#'>c</a></li>
+				<li><a href='#'>d</a></li>
+				<li><a href='#'>e</a></li>
+				<li><a href='#'>f</a></li>
+				<li><a href='#'>g</a></li>
+				<li><a href='#'>h</a></li>
+				<li><a href='#'>i</a></li>
+				<li><a href='#'>j</a></li>
+				<li><a href='#'>k</a></li>
+				<li><a href='#'>l</a></li>
+				<li><a href='#'>m</a></li>
+				<li><a href='#'>n</a></li>
+				<li><a href='#'>o</a></li>
+				<li><a href='#'>p</a></li>
+				<li><a href='#'>q</a></li>
+				<li><a href='#'>r</a></li>
+				<li><a href='#'>s</a></li>
+				<li><a href='#'>t</a></li>
+				<li><a href='#'>u</a></li>
+				<li><a href='#'>v</a></li>
+				<li><a href='#'>w</a></li>
+				<li><a href='#'>x</a></li>
+				<li><a href='#'>y</a></li>
+				<li><a href='#'>z</a></li>
+			</ul>
+			</div>
+			<div class='rus_tabs'>
+			<ul class='russian_alphabet'>
+				<li><a href='#'>а</a></li>
+				<li><a href='#'>б</a></li>
+				<li><a href='#'>в</a></li>
+				<li><a href='#'>г</a></li>
+				<li><a href='#'>д</a></li>
+				<li><a href='#'>е</a></li>
+				<li><a href='#'>ж</a></li>
+				<li><a href='#'>з</a></li>
+				<li><a href='#'>и</a></li>
+				<li><a href='#'>к</a></li>
+				<li><a href='#'>л</a></li>
+				<li><a href='#'>м</a></li>
+				<li><a href='#'>н</a></li>
+				<li><a href='#'>о</a></li>
+				<li><a href='#'>п</a></li>
+				<li><a href='#'>р</a></li>
+				<li><a href='#'>с</a></li>
+				<li><a href='#'>т</a></li>
+				<li><a href='#'>у</a></li>
+				<li><a href='#'>ф</a></li>
+				<li><a href='#'>х</a></li>
+				<li><a href='#'>ц</a></li>
+				<li><a href='#'>ч</a></li>
+				<li><a href='#'>ш</a></li>
+				<li><a href='#'>щ</a></li>
+				<li><a href='#'>ъ</a></li>
+				<li><a href='#'>э</a></li>
+				<li><a href='#'>ю</a></li>
+				<li><a href='#'>я</a></li>
+				
+				
+			</ul>
+			</div>
+			<div id='twclosed' class='tabs_tab_controller'>Табулатуры</div>
+			</div>
+		</div>
+	</div>
+	<div class='main_content'>
+	<div class='left_column'>
+		<!--
+Статьи по категориям
+Презентации музыки и клипов
+Уроки игры на гитаре
+Об электрогитаре
+Новости рока
+Звукозапись и сведение
+Разборы песен
+-->
+<div class='block_most_popular'>
+<div class='block_header'>Популярное</div>
+<ul>
+<li><a href='#'>Как правильно подключить гитару к компьютеру</a></li>
+<li><a href='#'>Импульсы гитарных кабинетов</a></li>
+<li><a href='#'>Как заменить струны на электрогитаре</a></li>
+<li><a href='#'>Как играть “Проклятый старый дом”, разбор песни Король и Шут</a></li>
+<li><a href='#'>Как правильно настроить мензуру на электрогитаре</a></li>
+<li><a href='#'>Новый альбом PAPA ROACH 2014 года</a></li>
+<li><a href='#'>Как происходит запись электрогитары на студии?</a></li>
+</ul>
+</div>
+
+<div class='block_most_popular'>
+<div class='block_header'>Последние материалы</div>
+<ul>
+<li><a href='#'>Как правильно подключить гитару к компьютеру</a></li>
+<li><a href='#'>Импульсы гитарных кабинетов</a></li>
+<li><a href='#'>Как заменить струны на электрогитаре</a></li>
+<li><a href='#'>Как играть “Проклятый старый дом”, разбор песни Король и Шут</a></li>
+<li><a href='#'>Как правильно настроить мензуру на электрогитаре</a></li>
+<li><a href='#'>Новый альбом PAPA ROACH 2014 года</a></li>
+<li><a href='#'>Как происходит запись электрогитары на студии?</a></li>
+</ul>
+</div>
+	</div>
+	<div class='center_column'>
+		Итак, в прошлой статье мы разобрались что такое vst плагины и где они используются. Следующий шаг – нужно где то раздобыть эти самые плагины. В этом нам снова поможет интернет. Как уже писалось ранее – vst плагины делятся на платные и бесплатные. Стало быть бесплатные можно беспрепятственно скачать с официального сайта распространителя продукта. Но что, если нам нужны платные vst? 
+
+Vst плагины торрент
+
+Настоящая кладезь бесплатного контента. Причем как распространяемого свободно, так и за определенную плату. Автор этих строк ни в коем случае не призывает заниматься пиратством. Следует уважать труд разработчиков. Тем более, что практически на каждый платный vst-плагин  рассчитан краткосрочный период бесплатного использования (trial) – так называемый период пробного использования. За месяц вы должны определиться – нужен вам этот плагин в своей работе или нет. Если да – будьте добры заплатить.
+
+Скачать vst плагины
+
+На сайте riffter.ru в скором времени появится полноценный раздел, в котором все посетители сайта смогут скачать бесплатно лучшие vst плагины. Там будут только те vst plugins, которые удалось опробовать и самостоятельно убедиться в их качестве!  Также предполагается описание и рейтинг этих плагинов.
+
+Сайты, где можно скачать vst плагины
+
+В интернете предостаточно других сайтов, где можно скачать vst плагины бесплатно. Многие из них – третьесортные поделки, заваленные рекламой. К тому же на них легко можно подцепить вредоносные программы. Я предлагаю оставлять в комментариях ссылки только на качественные сайты, где можно скачать vst плагины бесплатно. В последующем мы составим рейтинг лучших из них. Это позволит отсеять некачественные ресурсы и ускорит поиск нужного vst плагина.
+	</div>
+	<div class='right_column'>
+		background: #961c1c; /* Old browsers */
+background: -moz-linear-gradient(left,  #961c1c 0%, #bd2623 26%, #bd2623 26%, #bd2623 74%, #bd2623 74%, #d66e66 95%, #d66e66 95%, #bd2623 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#961c1c), color-stop(26%,#bd2623), color-stop(26%,#bd2623), color-stop(74%,#bd2623), color-stop(74%,#bd2623), color-stop(95%,#d66e66), color-stop(95%,#d66e66), color-stop(100%,#bd2623)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #961c1c 0%,#bd2623 26%,#bd2623 26%,#bd2623 74%,#bd2623 74%,#d66e66 95%,#d66e66 95%,#bd2623 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #961c1c 0%,#bd2623 26%,#bd2623 26%,#bd2623 74%,#bd2623 74%,#d66e66 95%,#d66e66 95%,#bd2623 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #961c1c 0%,#bd2623 26%,#bd2623 26%,#bd2623 74%,#bd2623 74%,#d66e66 95%,#d66e66 95%,#bd2623 100%); /* IE10+ */
+background: linear-gradient(to right,  #961c1c 0%,#bd2623 26%,#bd2623 26%,#bd2623 74%,#bd2623 74%,#d66e66 95%,#d66e66 95%,#bd2623 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#961c1c', endColorstr='#bd2623',GradientType=1 ); /* IE6-9 */
+
+	</div>
+	</div>
+	<div class='footer'>
+		FOOTER
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+	$(".tabs_tab_controller").click(function(){
+	msg = $('.tabs_tab_controller').attr('id');
+	if (msg == "twclosed"){
+		$(this).parent().animate({bottom: "0"}, 300);
+		$('.tabs_tab_controller').attr('id','twopen');		
+		}
+			
+	if (msg == "twopen"){
+		$(this).parent().animate({bottom: "54"}, 300);
+		$('.tabs_tab_controller').attr('id','twclosed');
+		}
+	});
+	});
+</script>
+</body>
+</html>
+<!--
+		
+-->		
